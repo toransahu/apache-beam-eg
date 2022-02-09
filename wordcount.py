@@ -61,14 +61,16 @@ def run(argv=None):
 
         counts = (
             lines
-            | 'Split' >> (beam.ParDo(WordExtractingDoFn()).with_output_types(str))
+            | 'Split-test' >> (beam.ParDo(WordExtractingDoFn()).with_output_types(str))
             # | 'LowerCaseWay1' >> beam.Map(lambda x: str.lower(x))
             # | 'PairWithOne' >> beam.Map(lambda x: (x, 1))
 
-            | 'LowerCaseWay2' >> beam.Map(str.lower)
-            | 'PairWithOne' >> beam.Map(lambda x: (x, 1))
+            # | 'LowerCaseWay2' >> beam.Map(str.lower)
+            # | 'PairWithOne' >> beam.Map(lambda x: (x, 1))
 
             # | 'PairLowerCaseWithOne' >> beam.Map(lambda x: (x.lower(), 1))
+
+            | 'PairWithOne' >> beam.Map(lambda x: (x, 1))
             | 'GroupAndSum' >> beam.CombinePerKey(sum))
 
         # Format the counts into a PCollection of strings.

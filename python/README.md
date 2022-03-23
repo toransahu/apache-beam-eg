@@ -13,14 +13,14 @@
 ### Installing
 
 ```
-~/disk/E/workspace/github.com/toransahu/apache-beam-eg on  blog! ⌚ 10:36:11
+~/disk/E/workspace/github.com/toransahu/apache-beam-eg on  ! ⌚ 10:36:11
 $ python -m venv .venv
 
-~/disk/E/workspace/github.com/toransahu/apache-beam-eg on  blog! ⌚ 10:36:11
+~/disk/E/workspace/github.com/toransahu/apache-beam-eg on  ! ⌚ 10:36:11
 $ . ./.venv/bin/activate
 
 (.venv)
-~/disk/E/workspace/github.com/toransahu/apache-beam-eg on  blog! ⌚ 10:33:52
+~/disk/E/workspace/github.com/toransahu/apache-beam-eg on  ! ⌚ 10:33:52
 $ pip install -r python/requirements.txt
 ```
 

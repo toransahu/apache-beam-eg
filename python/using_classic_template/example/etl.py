@@ -5,7 +5,6 @@
 
 """Etl."""
 
-import argparse
 from pathlib import Path
 import logging
 import re

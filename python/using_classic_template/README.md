@@ -2,7 +2,7 @@
 
 ```bash
 /github.com/toransahu/apache-beam-eg
-$ python python/examples/using_classic_template/etl.py \
+$ python python/using_classic_template/example/etl.py \
 --runner DirectRunner
 ```
 
@@ -10,7 +10,7 @@ $ python python/examples/using_classic_template/etl.py \
 
 ```bash
 /github.com/toransahu/apache-beam-eg
-$ python python/examples/using_classic_template/etl.py \
+$ python python/using_classic_template/example/etl.py \
 --runner DataflowRunner \
 --region us-central1 \
 --project apache-beam-eg \
@@ -23,7 +23,7 @@ $ python python/examples/using_classic_template/etl.py \
 
 ```bash
 /github.com/toransahu/apache-beam-eg
-$ python python/examples/using_classic_template/etl.py \
+$ python python/using_classic_template/example/etl.py \
 --project=apache-beam-eg \
 --job_name=etl-`date +%Y%m%d-%H%M%S` \
 --template_location=gs://apache-beam-eg/templates/etl \
@@ -101,6 +101,6 @@ $ curl \
 $ pip install google-api-python-client
 
 /github.com/toransahu/apache-beam-eg
-$ python python/examples/using_classic_template/run_template.py \
+$ python python/using_classic_template/example/run_template.py \
 ```
 

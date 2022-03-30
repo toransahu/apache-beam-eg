@@ -2,7 +2,7 @@
 
 ```bash
 /github.com/toransahu/apache-beam-eg
-$ python python/examples/basic/etl.py \
+$ python python/basic/example/etl.py \
 --runner DirectRunner
 ```
 
@@ -10,7 +10,7 @@ $ python python/examples/basic/etl.py \
 
 ```bash
 /github.com/toransahu/apache-beam-eg
-$ python python/examples/basic/etl.py \
+$ python python/basic/example/etl.py \
 --runner DataflowRunner \
 --region us-central1 \
 --project apache-beam-eg \

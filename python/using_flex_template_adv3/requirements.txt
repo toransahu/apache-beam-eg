@@ -1,0 +1,2 @@
+apache-beam[gcp]==2.36.0
+excel2json-3

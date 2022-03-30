@@ -1,0 +1,40 @@
+# USAGE:
+# $ docker image build -t <WORKER_IMAGE_GCR_URL> -f <DOCKERFILE> <DOCKER_BUILD_CONTEXT_DIR>
+# $ docker push <WORKER_IMAGE_GCR_URL>
+#
+# eg.
+# /github.com/toransahu/apache-beam-eg/python/using_flex_template_adv2
+# $ export WORKER_IMAGE="gcr.io/apache-beam-eg/dataflow/python/using_flex_template_adv2/flex_template_worker:v0.0.1"
+# $ docker image build -t $WORKER_IMAGE -f Dockerfile.dataflowWorker .
+# $ docker push $WORKER_IMAGE
+
+
+FROM apache/beam_python3.8_sdk:2.36.0
+
+
+ARG WORKDIR=/dataflow/python/using_flex_template_adv2
+RUN mkdir -p ${WORKDIR}
+WORKDIR ${WORKDIR}
+
+COPY . .
+
+ENV PYTHON_REQUIREMENTS_FILE="${WORKDIR}/requirements.txt"
+
+# We could get rid of installing libffi-dev and git, or we could leave them.
+RUN apt-get update \
+    && apt-get install -y libffi-dev git \
+    && rm -rf /var/lib/apt/lists/* \
+    # Upgrade pip and install the requirements.
+    && pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r $PYTHON_REQUIREMENTS_FILE \
+    # Download the requirements to speed up launching the Dataflow job.
+    && pip download --no-cache-dir --dest /tmp/dataflow-requirements-cache -r $PYTHON_REQUIREMENTS_FILE
+
+# install other deps as well
+RUN pip install --no-cache-dir -U sample-0.1-py3-none-any.whl
+
+# Since we already downloaded all the dependencies, there's no need to rebuild everything.
+ENV PIP_NO_DEPS=True
+
+# (default with default base image) explicitely mentioning for readability
+ENTRYPOINT ["/opt/apache/beam/boot"]

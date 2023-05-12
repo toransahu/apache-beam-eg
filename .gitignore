@@ -130,3 +130,4 @@ dmypy.json
 
 # project results
 results/
+profile_dump/

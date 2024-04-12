@@ -25,8 +25,11 @@ class Pipeline:
             direct_running_mode="multi_threading",
             direct_num_workers=10,  # try making it 10
             profile_cpu=True,
+            # profile_memory=True,
             profile_location="./profile_dump/"
         )
+        # NOTE: relies on https://github.com/jrfonseca/gprof2dot & graphviz
+        # Understand the stats using https://github.com/jrfonseca/gprof2dot#output
         logger.info(pipeline_options.view_as(ProfilingOptions))
         with beam.Pipeline(options=pipeline_options) as pipeline:
             pcoll1 = pipeline | "Create1" >> beam.Create([1, 2, 3, 4, 5])
@@ -36,10 +39,19 @@ class Pipeline:
 
 
 class DummyFn(beam.DoFn):
+    def start_bundle(self):
+        logger.info(f"Bundle Start")
+        return super().start_bundle()
+
     def process(self, element):
         requests.get(f"https://reqres.in/api/users?delay={element}")
         logger.info(f"Rx: {element} ({type(element)})")
         yield element
+
+    def finish_bundle(self):
+        logger.info(f"Bundle Finish")
+        return super().start_bundle()
+        return super().finish_bundle()
 
 
 if __name__ == "__main__":
